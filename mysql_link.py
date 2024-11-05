@@ -4,19 +4,20 @@ import os
 class MysqlLink:
     def __init__(self):
         self.connection = None
-        self.database = "swapisticated$PL_database"  # Update with your PythonAnywhere db name
+        self.database = "freedb_PL_database"
         self.connect_to_database()
 
     def connect_to_database(self):
         try:
             self.connection = mc.connect(
-                user="swapisticated",                  # PythonAnywhere username
-                password="BBKwn2QvD&3rvd",              # PythonAnywhere database password
-                host="swapisticated.mysql.pythonanywhere-services.com",  # Hostname for MySQL
+                user="freedb_swapisticated",
+                password="4s@vjSxtm78yfz*",
+                host="sql.freedb.tech",
+                port=3306,
                 database=self.database
             )
             if self.connection.is_connected():
-                print("Connected to the database!")
+                print("Connected to the FreeDB database!")
         except mc.Error as e:
             print(f"Error connecting to the database: {e}")
             self.connection = None
