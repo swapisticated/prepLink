@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>PrepLink Candidates</h1>
+
+    <p>Total Members: {{ member_count }}</p>
+
+    <!-- Display Member List -->
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Membership Duration</th>
+            <th>Paid Fee</th>
+            <th>Phone Number</th>
+            <th>Actions</th>
+        </tr>
+        {% for member in members %}
+        <tr>
+            <td>{{ member.id }}</td>
+            <td>{{ member.name }}</td>
+            <td>{{ member.age }}</td>
+            <td>{{ member.gender }}</td>
+            <td>{{ member.membership_duration }}</td>
+            <td>{{ member.paid_fee }}</td>
+            <td>{{ member.phone_number }}</td>
+            <td>
+                <form action="/delete_member/{{ member.id }}" method="POST">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Add New Member</h2>
+    <form action="/add_member" method="POST">
+        <input type="text" name="name" placeholder="Name" required><br>
+        <input type="number" name="age" placeholder="Age" required><br>
+        <input type="text" name="gender" placeholder="Gender" required><br>
+        <input type="text" name="membership_duration" placeholder="Membership Duration" required><br>
+        <input type="number" name="paid_fee" placeholder="Paid Fee" required><br>
+        <input type="text" name="phone_number" placeholder="Phone Number" required><br>
+        <button type="submit">Add Member</button>
+    </form>
+</body>
+</html>
