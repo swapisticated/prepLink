@@ -4,16 +4,15 @@ import os
 class MysqlLink:
     def __init__(self):
         self.connection = None
-        self.database = os.getenv("MYSQLDATABASE")
+        self.database = "swapisticated$PL_database"  # Update with your PythonAnywhere db name
         self.connect_to_database()
 
     def connect_to_database(self):
         try:
             self.connection = mc.connect(
-                user=os.getenv("MYSQLUSER"),
-                password=os.getenv("MYSQLPASSWORD"),
-                host=os.getenv("MYSQLHOST"),
-                port=os.getenv("MYSQLPORT"),  # Use Railway’s MYSQLPORT
+                user="swapisticated",                  # PythonAnywhere username
+                password="BBKwn2QvD&3rvd",              # PythonAnywhere database password
+                host="swapisticated.mysql.pythonanywhere-services.com",  # Hostname for MySQL
                 database=self.database
             )
             if self.connection.is_connected():
