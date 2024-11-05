@@ -4,7 +4,7 @@ import os
 class MysqlLink:
     def __init__(self):
         self.connection = None
-        self.database = os.getenv("MYSQLDATABASE")
+        self.database = os.getenv("MYSQLDATABASE")  # Use env variable for database name
         self.connect_to_database()
 
     def connect_to_database(self):
@@ -13,13 +13,15 @@ class MysqlLink:
                 user=os.getenv("MYSQLUSER"),
                 password=os.getenv("MYSQLPASSWORD"),
                 host=os.getenv("MYSQLHOST"),
+                port=int(os.getenv("MYSQLPORT", 3306)),  # default to 3306 if not set
                 database=self.database
             )
             if self.connection.is_connected():
-                print("Connected to the database!")
+                print("Connected to Railway MySQL database!")
         except mc.Error as e:
             print(f"Error connecting to the database: {e}")
             self.connection = None
+
 
 
     def table_creation(self):
