@@ -4,20 +4,19 @@ import os
 class MysqlLink:
     def __init__(self):
         self.connection = None
-        self.database = "freedb_PL_database"
+        self.database = os.getenv("MYSQLDATABASE")
         self.connect_to_database()
 
     def connect_to_database(self):
         try:
             self.connection = mc.connect(
-                user="freedb_swapisticated",
-                password="4s@vjSxtm78yfz*",
-                host="sql.freedb.tech",
-                port=3306,
+                user=os.getenv("MYSQLUSER"),
+                password=os.getenv("MYSQLPASSWORD"),
+                host=os.getenv("MYSQLHOST"),
                 database=self.database
             )
             if self.connection.is_connected():
-                print("Connected to the FreeDB database!")
+                print("Connected to the database!")
         except mc.Error as e:
             print(f"Error connecting to the database: {e}")
             self.connection = None
