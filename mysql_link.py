@@ -13,6 +13,7 @@ class MysqlLink:
                 user=os.getenv("MYSQLUSER"),
                 password=os.getenv("MYSQLPASSWORD"),
                 host=os.getenv("MYSQLHOST"),
+                port=os.getenv("MYSQLPORT"),  # Use Railway’s MYSQLPORT
                 database=self.database
             )
             if self.connection.is_connected():
