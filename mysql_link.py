@@ -22,13 +22,11 @@ class MysqlLink:
             print(f"Error connecting to the database: {e}")
             self.connection = None
 
-
-
     def table_creation(self):
         if self.connection:
             try:
-                cursor = self.connection.cursor()  # Create cursor here
-                # Create members table if it doesn't exist
+                cursor = self.connection.cursor()
+                # Ensure the database and table exist
                 cursor.execute(f"CREATE DATABASE IF NOT EXISTS {self.database} CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci")
                 cursor.execute(f"USE {self.database}")
                 cursor.execute("""
@@ -43,7 +41,7 @@ class MysqlLink:
                     );
                 """)
                 print("Table created successfully or already exists.")
-                cursor.close()  # Close cursor after use
+                cursor.close()
             except mc.Error as e:
                 print(f"Error executing table creation query: {e}")
 
@@ -54,8 +52,3 @@ class MysqlLink:
                 print("Database connection closed.")
             else:
                 print("Connection already closed.")
-
-
-
-
-
