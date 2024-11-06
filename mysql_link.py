@@ -4,16 +4,16 @@ import os
 class MysqlLink:
     def __init__(self):
         self.connection = None
-        self.database = os.getenv("MYSQLDATABASE")  # Use env variable for database name
+        self.database = os.getenv("MYSQL_DATABASE")  # Updated variable name
         self.connect_to_database()
 
     def connect_to_database(self):
         try:
             self.connection = mc.connect(
-                user=os.getenv("MYSQLUSER"),
-                password=os.getenv("MYSQLPASSWORD"),
-                host=os.getenv("MYSQLHOST"),
-                port=int(os.getenv("MYSQLPORT", 3306)),  # default to 3306 if not set
+                user=os.getenv("MYSQL_USER"),  # Updated variable name
+                password=os.getenv("MYSQL_PASSWORD"),  # Updated variable name
+                host=os.getenv("MYSQL_HOST"),  # Updated variable name
+                port=int(os.getenv("MYSQL_PORT", 3306)),  # Updated variable name
                 database=self.database
             )
             if self.connection.is_connected():
